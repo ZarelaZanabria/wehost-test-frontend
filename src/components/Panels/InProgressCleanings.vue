@@ -90,7 +90,7 @@ import jsonDataClean from '../../data/jsondata.json'
                 // eslint-disable-next-line vue/no-async-in-computed-properties
                 setTimeout(() => {
                     this.navigateNext();
-                }, 5000); 
+                }, 5000);  
             
                 let dataListar = this.dataCleanDepartment.filter ((element, index)=>{                
                                                   
@@ -105,6 +105,8 @@ import jsonDataClean from '../../data/jsondata.json'
                         console.log('TOTAL ', horaObjectInSegunds  );
                         
                         console.log('Hora en Segundos', hoursInSegundos, 'MINUTOS', minutosInSegundos, 'SEGUNDOS', segundos);
+                        /* Object.defineProperty(element, 'horaInSegundos', {value : hoursInSegundos});
+ */
                         
                         
                        console.log('ELEMENTO' , element.time);        
@@ -135,8 +137,24 @@ import jsonDataClean from '../../data/jsondata.json'
             
             },
 
-            convertirSegundosAHora(){
-
+             convertirSegundosAHora(tiempoActual, tiempoData){
+                let valor; 
+                if(tiempoActual>tiempoData){
+                    valor = tiempoActual-tiempoData
+                }else {
+                valor = tiempoData-tiempoActual;
+                }
+                console.log('Valor que tenemos ,' , valor, tiempoActual, tiempoData, 'cada elemento');
+                
+                let hours = Math.floor(valor / 3600);
+                let minutes = Math.floor((valor%3600)/60)
+                let seconds = valor%60;
+                   /*  minutes = minutes < 10 ? '0' + minutes : minutes;
+                    seconds = seconds < 10 ? '0' + seconds : seconds;  */                   
+                const result = hours + ":" + minutes + ":" + seconds;
+                console.log('Resultado', result);
+                
+                return result;
             }
 
         
